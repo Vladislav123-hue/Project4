@@ -4,3 +4,6 @@ from .models import Category
 def category_list(request):
     categories = Category.objects.all()
     return render(request, 'shop/category_list.html', {'categories': categories})
+
+def homepage(request):
+    return render(request, 'shop/homepage.html')
