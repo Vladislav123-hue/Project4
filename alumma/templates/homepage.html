@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ALUMMA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      background-color: #333;
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #444;
+      display: flex;
+      justify-content: center;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown > a {
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .dropdown:hover {
+      background-color: #555;
+    }
+
+    .dropdown-content {
+     display: none; 
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #666;
+      min-width: 160px;
+      height: 60px; /* Высота пустого выпадающего меню */
+      z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>ALUMMA</h1>
+  </header>
+
+  <nav>
+    <div class="dropdown">
+      <a href="#blog">Blog</a>
+      <div class="dropdown-content"></div>
+    </div>
+
+    <div class="dropdown">
+      <a href="#style">Style</a>
+      <div class="dropdown-content"></div>
+    </div>
+
+    <div class="dropdown">
+      <a href="#portfolio">Our Portfolio</a>
+      <div class="dropdown-content"></div>
+    </div>
+
+    <div class="dropdown">
+      <a href="#callback">Call back</a>
+      <div class="dropdown-content"></div>
+    </div>
+
+    <div class="dropdown">
+      <a href="#contact">Contact us</a>
+      <div class="dropdown-content"></div>
+    </div>
+  </nav>
+
+  <main>
+    <h2>Welcome to ALUMMA</h2>
+    <p>This is a layout with empty dropdown menus.</p>
+  </main>
+
+</body>
+</html>
