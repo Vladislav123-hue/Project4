@@ -1,7 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Style, Contact
-from django.contrib.auth.forms import UserCreationForm
-from django.http import JsonResponse
 
 def homepage(request):
     return render(request, 'homepage.html')
@@ -17,5 +15,10 @@ def sendDataForCallBack(request):
         phone = request.POST.get('phone')
         if name and phone:
             Contact.objects.create(name=name, phone=phone)
-            return JsonResponse({'status': 'success'})
+            return redirect(f'/thankyoupage?name={name}')
     return render(request, 'callbackpage.html')
+
+
+def thankYouView(request):
+    name = request.GET.get('name', '')
+    return render(request, 'thankyoupage.html', {'name': name})
