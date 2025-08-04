@@ -15,10 +15,11 @@ def sendDataForCallBack(request):
         phone = request.POST.get('phone')
         if name and phone:
             Contact.objects.create(name=name, phone=phone)
-            return redirect(f'/thankyoupage?name={name}')
+            return redirect(f'/thankyoupage?name={name}&phone={phone}')
     return render(request, 'callbackpage.html')
 
 
 def thankYouView(request):
     name = request.GET.get('name', '')
-    return render(request, 'thankyoupage.html', {'name': name})
+    phone = request.GET.get('phone', '')
+    return render(request, 'thankyoupage.html', {'name': name, 'phone': phone})
