@@ -5,5 +5,6 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homepage),
-    path('styles/', views.style, name="style")
+    path('styles/', views.style, name="style"),
+    path('callback/', views.sendDataForCallBack, name="callback")
 ]

@@ -15,7 +15,7 @@
     header {
       background-color: #333;
       color: white;
-      padding: 20px;
+      padding: 0;
       text-align: center;
       position: fixed;
       top: 0;
@@ -77,14 +77,14 @@
     <a href="#blog">Blog</a>
     <a href="{%  url 'style' %}">Style</a>
     <a href="#portfolio">Our Portfolio</a>
-    <a href="#callback">Call back</a>
+    <a href="{% url 'callback' %}">Call back</a>
     <a href="#contact">Contact us</a>
   </nav>
 
   <div class="content-wrapper">
     <div class="content">
       {% block content %}
-    <!-- Контент будет подставлен отсюда -->
+        <h1></h1>
     {% endblock %}
     </div>
   </div>
