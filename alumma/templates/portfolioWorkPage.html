@@ -1,9 +1,60 @@
 {% extends "homepage.html" %}
 
 {% block content %}
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .portfolio-card {
+      background-color: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .portfolio-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .portfolio-card h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #222;
+    }
+
+    .portfolio-card p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.6;
+    }
+  </style>
+
+  <div class="portfolio-grid">
     {% for work in works %}
-        <h1>{{work.name}}</h1>
-        <p>{{work.description}}</p>
-        <img src="{{ work.pillow.url}}">
-     {% endfor %}
+      <div class="portfolio-card">
+        <img src="{{ work.pillow.url }}" alt="{{ work.name }}">
+        <h1>{{ work.name }}</h1>
+        <p>{{ work.description }}</p>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}

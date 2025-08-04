@@ -1,9 +1,60 @@
 {% extends "homepage.html" %}
 
 {% block content %}
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    .style-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .style-card {
+      background-color: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .style-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .style-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .style-card h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    .style-card p {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.5;
+    }
+  </style>
+
+  <div class="style-grid">
     {% for style in styles %}
-        <h1>{{style.name}}</h1>
-        <p>{{style.description}}</p>
-        <img src="{{ style.pillow.url}}">
-     {% endfor %}
+      <div class="style-card">
+        <img src="{{ style.pillow.url }}" alt="{{ style.name }}">
+        <h1>{{ style.name }}</h1>
+        <p>{{ style.description }}</p>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}
