@@ -1,0 +1,9 @@
+{% extends "homepage.html" %}
+
+{% block content %}
+    {% for work in works %}
+        <h1>{{work.name}}</h1>
+        <p>{{work.description}}</p>
+        <img src="{{ work.pillow.url}}">
+     {% endfor %}
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import Style, Contact
+from .models import Style, Contact, PortfolioWork
 
 def homepage(request):
     return render(request, 'homepage.html')
@@ -23,3 +23,8 @@ def thankYouView(request):
     name = request.GET.get('name', '')
     phone = request.GET.get('phone', '')
     return render(request, 'thankyoupage.html', {'name': name, 'phone': phone})
+
+
+def ShowPortfolio(request):
+    works = PortfolioWork.objects.all()
+    return render(request, 'portfolioWorkPage.html', {'works': works})

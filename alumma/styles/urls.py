@@ -8,4 +8,5 @@ urlpatterns = [
     path('styles/', views.style, name="style"),
     path('callback/', views.sendDataForCallBack, name="callback"),
     path('thankyoupage/', views.thankYouView, name='thank_you'),
+    path('ourPortfolio/', views.ShowPortfolio, name='portfolioWorkPage'),
 ]
