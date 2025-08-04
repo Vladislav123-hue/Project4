@@ -6,3 +6,4 @@ class Style(models.Model):
         blank=True,                    
         null=False                     
     )
+    pillow = models.ImageField(default='nameOfPhoto.png', blank=True)

@@ -1,61 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>ALUMMA</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
       background-color: #f9f9f9;
     }
 
     header {
       background-color: #333;
-      padding: 20px;
       color: white;
+      padding: 20px;
       text-align: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      z-index: 1;
+      box-sizing: border-box;
     }
 
     nav {
       background-color: #444;
-      display: flex;
-      justify-content: center;
-    }
-
-    .dropdown {
-      position: relative;
-    }
-
-    .dropdown > a {
-      color: white;
-      padding: 14px 20px;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .dropdown:hover {
-      background-color: #555;
-    }
-
-    .dropdown-content {
-     display: none; 
-      position: absolute;
-      top: 100%;
+      width: 180px;
+      padding-top: 80px;
+      position: fixed;
+      top: 0;
       left: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    nav a {
+      color: white;
+      padding: 15px 20px;
+      text-decoration: none;
+      border-bottom: 1px solid #555;
+      transition: background-color 0.3s;
+    }
+
+    nav a:hover {
       background-color: #666;
-      min-width: 160px;
-      height: 60px; /* Высота пустого выпадающего меню */
-      z-index: 1;
     }
 
-    .dropdown:hover .dropdown-content {
-      display: block;
+    .content-wrapper {
+      margin-left: 180px; /* отступ на ширину меню */
+      padding-top: 80px;  /* отступ под хедер */
+      width: calc(100% - 180px);
+      box-sizing: border-box;
     }
 
-    main {
+    .content {
+      background-color: white;
+      margin: 20px;
       padding: 20px;
-      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
     }
   </style>
 </head>
@@ -66,36 +74,22 @@
   </header>
 
   <nav>
-    <div class="dropdown">
-      <a href="#blog">Blog</a>
-      <div class="dropdown-content"></div>
-    </div>
-
-    <div class="dropdown">
-      <a href="#style">Style</a>
-      <div class="dropdown-content"></div>
-    </div>
-
-    <div class="dropdown">
-      <a href="#portfolio">Our Portfolio</a>
-      <div class="dropdown-content"></div>
-    </div>
-
-    <div class="dropdown">
-      <a href="#callback">Call back</a>
-      <div class="dropdown-content"></div>
-    </div>
-
-    <div class="dropdown">
-      <a href="#contact">Contact us</a>
-      <div class="dropdown-content"></div>
-    </div>
+    <a href="#blog">Blog</a>
+    <a href="{%  url 'style' %}">Style</a>
+    <a href="#portfolio">Our Portfolio</a>
+    <a href="#callback">Call back</a>
+    <a href="#contact">Contact us</a>
   </nav>
 
-  <main>
-    <h2>Welcome to ALUMMA</h2>
-    <p>This is a layout with empty dropdown menus.</p>
-  </main>
+  <div class="content-wrapper">
+    <div class="content">
+      {% block content %}
+    <!-- Контент будет подставлен отсюда -->
+    {% endblock %}
+    </div>
+  </div>
+
+  
 
 </body>
 </html>
