@@ -1,8 +1,11 @@
 from django.shortcuts import redirect, render
 from .models import Style, Contact, PortfolioWork
+from django.contrib.auth.forms import UserCreationForm
+
 
 def homepage(request):
     return render(request, 'homepage.html')
+
 
 def style(request):
     styles = Style.objects.all()
@@ -28,3 +31,22 @@ def thankYouView(request):
 def ShowPortfolio(request):
     works = PortfolioWork.objects.all()
     return render(request, 'portfolioWorkPage.html', {'works': works})
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = request.POST.get('username')
+            return redirect(f'/thankYouRegisterPage?username={username}')
+    else:
+        form = UserCreationForm()
+        
+    return render(request, 'registerPage.html', {'form': form})
+
+def thankYouRegisterPage(request):
+     username = request.GET.get('username', '')
+     return render(request, 'thankYouPageRegister.html', {'username': username})
+
+    

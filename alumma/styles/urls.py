@@ -9,4 +9,6 @@ urlpatterns = [
     path('callback/', views.sendDataForCallBack, name="callback"),
     path('thankyoupage/', views.thankYouView, name='thank_you'),
     path('ourPortfolio/', views.ShowPortfolio, name='portfolioWorkPage'),
+    path('register/', views.register, name='registerPage'),
+    path('thankYouRegisterPage/', views.thankYouRegisterPage, name='registerPageThanks')
 ]
