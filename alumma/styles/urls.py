@@ -10,5 +10,7 @@ urlpatterns = [
     path('thankyoupage/', views.thankYouView, name='thank_you'),
     path('ourPortfolio/', views.ShowPortfolio, name='portfolioWorkPage'),
     path('register/', views.register, name='registerPage'),
-    path('thankYouRegisterPage/', views.thankYouRegisterPage, name='registerPageThanks')
+    path('thankYouRegisterPage/', views.thankYouRegisterPage, name='registerPageThanks'),
+    path('profile/', views.profilePage, name='profile'),
+    path('loginPage/', views.loginPage, name='login')
 ]

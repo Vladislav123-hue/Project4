@@ -21,3 +21,4 @@ class PortfolioWork(models.Model):
         null=False                     
     )
     pillow = models.ImageField(default='nameOfPhoto.png', blank=True)
+

@@ -74,19 +74,17 @@
   </header>
 
   <nav>
-    <a href="#blog">Blog</a>
-    <a href="{%  url 'style' %}">Style</a>
-    <a href="{% url 'portfolioWorkPage' %}">Our Portfolio</a>
-    <a href="{% url 'callback' %}">Call back</a>
-    <a href="#contact">Contact us</a>
-    <a href="{% url 'registerPage' %}">Register</a>
-    <a href="{% url 'login' %}">Log in</a>
+    <a href="">Messages</a>
+    <a href="">Documents</a>
+    <a href="">Projects</a>
+    <a href="">Realization</a>
+    <a href="">Count</a>
   </nav>
 
   <div class="content-wrapper">
     <div class="content">
       {% block content %}
-        <h1></h1>
+        <h1>Welcome, {{username}}</h1>
     {% endblock %}
     </div>
   </div>
