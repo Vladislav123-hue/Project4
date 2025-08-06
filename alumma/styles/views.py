@@ -72,5 +72,5 @@ def loginPage(request):
     return render(request, 'LoginPage.html', {'form': form})
 
 
-#def messagesPage(request, username):
-    return render(request, 'messagesPage.html')
+def messagesPage(request, username):
+    return render(request, 'messagesPage.html', {'username' : username})
