@@ -1,0 +1,8 @@
+{% extends "ProfileLayout.html" %}
+
+{% block content %}
+    <form action="{% url 'messagesPage' username=username %}" method="get">
+        <input type="text" name="q" placeholder="Поиск...">
+        <button type="submit">Search</button>
+    </form>
+{% endblock %}

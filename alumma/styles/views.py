@@ -54,8 +54,8 @@ def thankYouRegisterPage(request):
 
 
 @login_required(login_url="login")
-def profilePage(request):
-     username = request.GET.get('username', '')
+def profilePage(request, username):
+     
      return render(request, 'ProfileLayout.html', {'username': username})
 
 
@@ -65,9 +65,12 @@ def loginPage(request):
         if form.is_valid():
             login(request, form.get_user())
             username = request.POST.get('username')
-            return redirect(f'/profile?username={username}')
+            return redirect('profile', username)
     else:
         form = AuthenticationForm()
         
     return render(request, 'LoginPage.html', {'form': form})
 
+
+#def messagesPage(request, username):
+    return render(request, 'messagesPage.html')
