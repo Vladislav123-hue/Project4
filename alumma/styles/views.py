@@ -1,11 +1,10 @@
 from django.shortcuts import redirect, render
-from .models import Style, Contact, PortfolioWork
+from .models import Style, Contact, PortfolioWork, Profile, Chat
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required 
-
-
+from django.contrib.auth.models import User
 def homepage(request):
     return render(request, 'homepage.html')
 
@@ -77,5 +76,37 @@ def loginPage(request):
     return render(request, 'LoginPage.html', {'form': form})
 
 
-def messagesPage(request, username):
-    return render(request, 'messagesPage.html', {'username' : username})
+def messagesPage(request):
+    query = request.GET.get('q', '') 
+    if query:
+        users = User.objects.filter(username__icontains=query)
+    else:
+        users = []
+
+    return render(request, 'messagesPage.html', {'users': users})
+
+def ChatPage(request, username):
+    senderModel = Profile.objects.get(user__username=request.user.username)
+    receiverModel = Profile.objects.get(user__username=username)
+    chatCollection = senderModel.chats.all()
+    if request.method == 'POST':
+        query = request.POST.get('chat', '')
+        if query:
+            newChatModel = Chat.objects.create(
+                profile=senderModel,  
+                sender = request.user.username,                     #создаю экземпляр модели
+                receiver = username,
+                content = query
+            )       
+            
+            senderModel.chats.add(newChatModel)                                 # добавляю в экземпляр модели
+            receiverModel.chats.add(newChatModel)
+            chatCollection = senderModel.chats.all()                                # здесь хранится коллекция чатов  
+
+    user = User.objects.get(username=username)
+    first_name=user.first_name
+    last_name=user.last_name
+
+            
+    
+    return render(request, 'ChatPage.html', {'first_name': first_name, 'last_name': last_name, 'chatCollection' : chatCollection, 'username' : username, 'current_username': request.user.username})

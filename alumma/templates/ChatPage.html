@@ -1,0 +1,91 @@
+{% extends "ProfileLayout.html" %}
+
+{% block content %}
+
+
+  <style>
+    .chatField {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    max-height: 500px;
+    overflow-y: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.outcoming-message {
+    background-color: #ffffff;
+    border-left: 4px solid #d62f2f;
+    padding: 15px;
+    margin-bottom: 12px;
+    margin-left: auto;             /* смещаем вправо */
+    margin-right: 40px;
+    max-width: 60%;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    text-align: left;
+}
+
+.incoming-message {
+    background-color: #f0f0f0;
+    border-right: 4px solid #2f80d6;
+    padding: 15px;
+    margin-bottom: 12px;
+    margin-right: auto;            /* смещаем влево */
+    margin-left: 40px;
+    max-width: 60%;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    text-align: left;
+}
+
+.chatMessage:hover {
+    background-color: #f0f8ff;
+}
+
+.chatMessage p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.chatMessage strong {
+    color: #4a90e2;
+}
+  </style>
+    <div>
+  <!-- Верхний блок: Заголовок -->
+  <div>
+    <h1>{{first_name}} {{last_name}}</h1>
+  </div>
+
+
+  <!-- Средний блок: Сообщения -->
+<div class="chatField">
+    {% for item in chatCollection %}
+        {% if item.sender != request.user.username %}
+            <div class="incoming-message">
+        {% else %}
+            <div class="outcoming-message">
+        {% endif %}
+            <p><strong>От:</strong> {{item.sender}}</p>
+            <p><strong>Кому:</strong> {{item.receiver}}</p>
+            <p><strong>Текст:</strong> {{item.content}}</p>
+        </div>
+    {% endfor %}
+</div>
+
+  <!-- Нижний блок: Форма -->
+  <form method="post" action="{% url 'profile_messages_chat' username %}">
+    {% csrf_token %}
+    <input
+      type="text"
+      name="chat"
+    />
+    <button type="submit">
+      Отправить
+    </button>
+  </form>
+</div>
+{% endblock %}
+    

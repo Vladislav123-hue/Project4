@@ -13,5 +13,6 @@ urlpatterns = [
     path('thankYouRegisterPage/', views.thankYouRegisterPage, name='registerPageThanks'),
     path('profile/', views.profilePage, name='profile'),
     path('loginPage/', views.loginPage, name='login'),
-    path('profile/<str:username>/messages/', views.messagesPage, name='profile_messages')
+    path('profile/messages/', views.messagesPage, name='profile_messages'),
+    path('profile/messages/chatWith=<str:username>', views.ChatPage, name='profile_messages_chat')
 ]
