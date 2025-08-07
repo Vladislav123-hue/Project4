@@ -74,7 +74,8 @@
   </header>
 
   <nav>
-    <a href="{% url 'profile_messages' username %}">Messages</a>
+    <a href="{% url 'profile' %}">Profile</a>
+    <a href="">Messages</a>
     <a href="">Documents</a>
     <a href="">Projects</a>
     <a href="">Realization</a>
@@ -85,7 +86,7 @@
   <div class="content-wrapper">
     <div class="content">
       {% block content %}
-        <h1>Welcome, {{username}}</h1>
+        <h1>Welcome, {{firstName}} {{lastName}}</h1>
     {% endblock %}
     </div>
   </div>

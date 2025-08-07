@@ -11,7 +11,7 @@ urlpatterns = [
     path('ourPortfolio/', views.ShowPortfolio, name='portfolioWorkPage'),
     path('register/', views.register, name='registerPage'),
     path('thankYouRegisterPage/', views.thankYouRegisterPage, name='registerPageThanks'),
-    path('profile/<str:username>/', views.profilePage, name='profile'),
+    path('profile/', views.profilePage, name='profile'),
     path('loginPage/', views.loginPage, name='login'),
     path('profile/<str:username>/messages/', views.messagesPage, name='profile_messages')
 ]

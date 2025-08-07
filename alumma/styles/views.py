@@ -54,18 +54,23 @@ def thankYouRegisterPage(request):
 
 
 @login_required(login_url="login")
-def profilePage(request, username):
+def profilePage(request):
      
-     return render(request, 'ProfileLayout.html', {'username': username})
+     user = request.user
+     firstName = user.first_name
+     secondName = user.last_name
+
+     return render(request, 'ProfileLayout.html', {'firstName': firstName, 'lastName': secondName})
 
 
 def loginPage(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            login(request, form.get_user())
-            username = request.POST.get('username')
-            return redirect('profile', username)
+            user = form.get_user()
+            login(request, user)
+
+            return redirect('profile')
     else:
         form = AuthenticationForm()
         
