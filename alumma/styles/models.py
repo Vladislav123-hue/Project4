@@ -25,11 +25,14 @@ class PortfolioWork(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    chats = models.ManyToManyField('Chat', related_name='participants', blank=True)
 
 class Chat(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='chat_set')
-    sender = models.CharField(max_length=100)
-    receiver = models.CharField(max_length=100)
-    content = models.CharField(max_length=100)
-    date = models.DateTimeField(auto_now_add=True)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE) 
+    speakingPartnerUsername = models.CharField(max_length=100)
+
+
+class Message(models.Model):
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='messages') #принадлежность класса singlechatinfo в образе коллекции к chat
+    content = models.CharField(max_length=100, null=True, blank=True)
+    sender = models.CharField(max_length=100, null=True, blank=True)
+    receiver = models.CharField(max_length=100, null=True, blank=True)

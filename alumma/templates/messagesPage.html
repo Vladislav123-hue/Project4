@@ -13,8 +13,16 @@
         <a href="{% url 'profile_messages_chat' user.username %}">{{ user.first_name }} {{ user.last_name }}</a>
       {% endfor %}
 
+</div>
+
+<div style="width: 100%; overflow-x: scroll; white-space: nowrap; border: 1px solid #ccc; padding: 10px;">
+Недавние:
+{% for name in profilesChats %}
+        <a href="">{{name.speakingPartnerUsername}}</a>
+      {% endfor %}
 
 </div>
+
     
 
 {% endblock %}

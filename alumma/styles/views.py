@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import Style, Contact, PortfolioWork, Profile, Chat
+from .models import Style, Contact, PortfolioWork, Profile, Chat, Message
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
@@ -77,36 +77,45 @@ def loginPage(request):
 
 
 def messagesPage(request):
+
+    yourProfile = Profile.objects.get(user__username=request.user.username)
+    profilesChats = Chat.objects.all()
+
+
     query = request.GET.get('q', '') 
     if query:
         users = User.objects.filter(username__icontains=query)
     else:
         users = []
 
-    return render(request, 'messagesPage.html', {'users': users})
+    return render(request, 'messagesPage.html', {'users': users, 'profilesChats' : profilesChats})
 
 def ChatPage(request, username):
-    senderModel = Profile.objects.get(user__username=request.user.username)
-    receiverModel = Profile.objects.get(user__username=username)
-    chatCollection = senderModel.chats.all()
+    yourProfile = Profile.objects.get(user__username=request.user.username)
+    profilesChats = Chat.objects.filter(speakingPartnerUsername=username, profile=yourProfile).first()
+    messages = Message.objects.filter(chat=profilesChats) if profilesChats else []  
     if request.method == 'POST':
         query = request.POST.get('chat', '')
         if query:
-            newChatModel = Chat.objects.create(
-                profile=senderModel,  
-                sender = request.user.username,                     #создаю экземпляр модели
-                receiver = username,
-                content = query
-            )       
-            
-            senderModel.chats.add(newChatModel)                                 # добавляю в экземпляр модели
-            receiverModel.chats.add(newChatModel)
-            chatCollection = senderModel.chats.all()                                # здесь хранится коллекция чатов  
+            yourProfile = Profile.objects.get(user__username=request.user.username) #достаем свой профайл
 
+            profilesChats = Chat.objects.filter(speakingPartnerUsername = username, profile=yourProfile).exists() #смотрим есть ли чаты с нужным адресатом
+
+            if not profilesChats:
+
+                currentChat = Chat.objects.create(speakingPartnerUsername = username, profile=yourProfile)
+                newMessage = Message.objects.create(content = query, sender = request.user.username, receiver = username, chat = currentChat)
+                messages = Message.objects.filter(chat=currentChat)
+            else:
+                currentChat = Chat.objects.get(speakingPartnerUsername = username, profile=yourProfile)
+                newMessage = Message.objects.create(content = query, sender = request.user.username, receiver = username, chat = currentChat)
+                messages = Message.objects.filter(chat=currentChat)
+                
+                        
     user = User.objects.get(username=username)
     first_name=user.first_name
     last_name=user.last_name
 
             
     
-    return render(request, 'ChatPage.html', {'first_name': first_name, 'last_name': last_name, 'chatCollection' : chatCollection, 'username' : username, 'current_username': request.user.username})
+    return render(request, 'ChatPage.html', {'first_name': first_name, 'last_name': last_name, 'messages' : messages, 'username' : username})
