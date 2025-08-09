@@ -16,11 +16,14 @@
 </div>
 
 <div style="width: 100%; overflow-x: scroll; white-space: nowrap; border: 1px solid #ccc; padding: 10px;">
-Недавние:
+Recent chats: <br>
+{% if profilesChats %}
 {% for name in profilesChats %}
-        <a href="">{{name.speakingPartnerUsername}}</a>
+        <a href="{% url 'profile_messages_chat' name.speakingPartnerUsername %}">{{name.speakingPartnerUsername}}</a><br>
       {% endfor %}
-
+{% else %}
+        <a>No chats yet</a>
+{% endif %}
 </div>
 
     
