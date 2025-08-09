@@ -93,7 +93,7 @@ def messagesPage(request):
 def ChatPage(request, username):
     yourProfile = Profile.objects.get(user__username=request.user.username)
     profilesChats = Chat.objects.filter(speakingPartnerUsername=username, profile=yourProfile).first()
-    messages = Message.objects.filter(chat=profilesChats) if profilesChats else []  
+    messages = Message.objects.filter(chat=profilesChats) if profilesChats else []     #отоюражение всех сообщений существующих
     if request.method == 'POST':
         query = request.POST.get('chat', '')
         if query:

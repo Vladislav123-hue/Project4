@@ -87,6 +87,7 @@ form button:hover {
 </style>
   <!-- Средний блок: Сообщения -->
 <div class="chatField">
+  {% if messages %}
     {% for item in messages %}
        <div class="message">
           <p class="sender">От: {{item.sender}}</p>
@@ -94,6 +95,9 @@ form button:hover {
           <p class="content">Сообщение: {{item.content}}</p>
        </div>
     {% endfor %}
+  {% else %}
+  <p>No messages yet</p>
+   {% endif %}
 </div>
 
   <!-- Нижний блок: Форма -->
